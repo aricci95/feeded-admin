@@ -1,7 +1,10 @@
 import React from 'react';
-import { initTable, handleList } from '../extensions/materialTable'
+import { initTable, createList } from '../extensions/materialTable'
+import ToastContext from '../contexts/toastContext'
 
 export default function UserList(props) {
+    const context = React.useContext(ToastContext)
+
     const name = 'user'
     const columns = [
         { title: 'Email', field: 'email' },
@@ -29,10 +32,10 @@ export default function UserList(props) {
     });
 
     React.useEffect(() => {
-        handleList(name, state, setState)
+        createList(name, state, setState, context)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    return initTable(name, state, setState, extraActions)
+    return initTable(name, state, setState, context, extraActions)
     
 }

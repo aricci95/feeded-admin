@@ -33,7 +33,7 @@ export default function FormDialog() {
     });
   };
 
-  const contextValue = React.useContext(ToastContext)
+  const context = React.useContext(ToastContext)
 
   const handleSavePassword = () => {
     if (password === confirmPassword) {
@@ -43,14 +43,14 @@ export default function FormDialog() {
 
       crudAPI.edit('user', state.user)
 
-      contextValue.toast('Mot de passe modifé');
+      context.toast('Mot de passe modifé');
 
       setState({
         open: false,
         user: undefined,
       });
     } else {
-      // TODO
+      context.toast('Les deux mots de passes ne sont pas les mêmes', 'error');
     }
   };
 
@@ -72,7 +72,6 @@ export default function FormDialog() {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="confirm_password"
             label="Confirmer le mot de passe"
@@ -82,11 +81,11 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Annuler
-          </Button>
           <Button onClick={handleSavePassword} color="primary">
             Valider
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Annuler
           </Button>
         </DialogActions>
       </Dialog>

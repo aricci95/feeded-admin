@@ -26,11 +26,11 @@ export default function SnackbarContainer() {
     type: 'success',
   });
 
-  const toast = (text) => {
+  const toast = (text, type='success') => {
     setState({
       open: true,
       text: text,
-      type: 'success',
+      type: type,
     });
   };
 

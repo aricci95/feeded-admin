@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default React.createContext({
-    toast: (text) => {}
+    toast: (text, type) => {}
 })

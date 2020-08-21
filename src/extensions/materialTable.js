@@ -2,7 +2,8 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import api from '../API/crudAPI';
 
-export function initTable(name, state, setState, extraActions = []) {
+export function initTable(name, state, setState, context, extraActions = []) {
+
     return (
         <MaterialTable
             title={name}
@@ -12,22 +13,22 @@ export function initTable(name, state, setState, extraActions = []) {
             editable={{
                 onRowAdd: (newData) =>
                     new Promise((resolve) => {
-                        handleRowAdd(name, newData, state, setState, resolve)
+                        handleRowAdd(name, newData, state, setState, resolve, context)
                     }),
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
-                        handleRowUpdate(name, newData, oldData, state, setState, resolve)
+                        handleRowUpdate(name, newData, oldData, state, setState, resolve, context)
                     }),
                 onRowDelete: (oldData) =>
                     new Promise((resolve) => {
-                        handleRowDelete(name, oldData, state, setState, resolve)
+                        handleRowDelete(name, oldData, state, setState, resolve, context)
                     }),
             }}
         />
     );
 }
 
-export function handleList(name, state, setState) {
+export function createList(name, state, setState) {
     api.list(name)
         .then(res => {
             setState({
@@ -37,7 +38,7 @@ export function handleList(name, state, setState) {
         })
 }
 
-export function handleRowAdd(name, newData, state, setState, resolve) {
+export function handleRowAdd(name, newData, state, setState, resolve, context) {
     api.create(name, newData)
         .then(res => {
             let dataToAdd = [...state.data, newData];
@@ -53,7 +54,7 @@ export function handleRowAdd(name, newData, state, setState, resolve) {
         })
 }
 
-export function handleRowUpdate(name, newData, oldData, state, setState, resolve) {
+export function handleRowUpdate(name, newData, oldData, state, setState, resolve, context) {
     api.edit(name, newData)
         .then(res => {
             const dataUpdate = [...state.data];
@@ -72,7 +73,7 @@ export function handleRowUpdate(name, newData, oldData, state, setState, resolve
         })
 }
 
-export function handleRowDelete(name, oldData, state, setState, resolve) {
+export function handleRowDelete(name, oldData, state, setState, resolve, context) {
     api.remove(name, oldData)
         .then(res => {
             const dataDelete = [...state.data];
@@ -82,6 +83,7 @@ export function handleRowDelete(name, oldData, state, setState, resolve) {
                 columns: state.columns,
                 data: [...dataDelete],
             })
+            context.toast('Element supprimé');
             resolve()
         })
         .catch(error => {
