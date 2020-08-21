@@ -1,12 +1,12 @@
 import React from 'react';
 import './styles/App.css';
-import './styles/Material.css';
-import ResponsiveDrawer from './components/ResponsiveDrawer'
+
+import SnackbarContainer from './components/SnackbarContainer'
 
 function App() {
   return (
     <div className="App">
-      <ResponsiveDrawer />
+        <SnackbarContainer />
     </div>
   );
 }

@@ -19,6 +19,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableList from './TableList'
+import UserList from './UserList'
+import PasswordModal from './PasswordModal'
 
 const drawerWidth = 240;
 
@@ -86,7 +88,11 @@ function ResponsiveDrawer(props) {
       case 'Tables':
         return <TableList />
       case 'Utilisateurs':
-        return <WaiterIcon />
+        return (
+          <div>
+            <PasswordModal />
+          </div>
+        )
       case 'Plats':
         return <FoodIcon />
       case 'Déconnexion':
@@ -177,7 +183,7 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        { renderPageComponent() }
+        {renderPageComponent()}
       </main>
     </div>
   );
