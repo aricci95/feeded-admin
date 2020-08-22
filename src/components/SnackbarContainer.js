@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SnackbarContainer() {
+export default function SnackbarContainer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     open: false,
@@ -26,7 +26,7 @@ export default function SnackbarContainer() {
     type: 'success',
   });
 
-  const toast = (text, type='success') => {
+  const toast = (text, type = 'success') => {
     setState({
       open: true,
       text: text,
@@ -55,10 +55,10 @@ export default function SnackbarContainer() {
       <AppContext.Provider value={contextValue}>
         <Snackbar open={state.open} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity={state.type}>
-            { state.text }
+            {state.text}
           </Alert>
         </Snackbar>
-        <ResponsiveDrawer />
+        <ResponsiveDrawer setAuthenticated={props.setAuthenticated}/>
       </AppContext.Provider>
     </div>
   );

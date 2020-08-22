@@ -3,8 +3,6 @@ import { initTable, createList } from '../extensions/materialTable'
 import ToastContext from '../contexts/toastContext'
 
 export default function TableList() {
-    const context = React.useContext(ToastContext)
-
     const name = 'table'
     const columns = [
         { title: 'Numéro', field: 'number', type: 'numeric' },
@@ -15,6 +13,8 @@ export default function TableList() {
         columns: columns,
         data: [],
     });
+
+    const context = React.useContext(ToastContext)
 
     React.useEffect(() => {
         createList(name, state, setState, context)

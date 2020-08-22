@@ -3,8 +3,6 @@ import { initTable, createList } from '../extensions/materialTable'
 import ToastContext from '../contexts/toastContext'
 
 export default function UserList(props) {
-    const context = React.useContext(ToastContext)
-
     const name = 'user'
     const columns = [
         { title: 'Email', field: 'email' },
@@ -25,6 +23,8 @@ export default function UserList(props) {
             }
         }
     ]
+
+    const context = React.useContext(ToastContext)
 
     const [state, setState] = React.useState({
         columns,

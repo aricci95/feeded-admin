@@ -20,6 +20,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableList from './TableList'
 import PasswordModal from './PasswordModal'
+import logo from '../images/feeded_logo.png'
+import authAPI from '../API/authAPI'
 
 const drawerWidth = 240;
 
@@ -46,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  toolbar: {
+    backgroundColor: 'rgb(58, 166, 221)',
+  },
   drawerPaper: {
     width: drawerWidth,
   },
@@ -103,7 +107,9 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div className={classes.toolbar}>
+        <img src={logo} />
+      </div>
       <Divider />
       <List>
         {['Tables', 'Utilisateurs', 'Plats'].map((text, index) => (
@@ -118,7 +124,10 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {['Déconnexion'].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} onClick={() => {
+              authAPI.logout()
+              props.setAuthenticated(false)
+            }}>
             <ListItemIcon>{renderMenuIcon(text)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>

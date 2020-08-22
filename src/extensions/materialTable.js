@@ -3,10 +3,11 @@ import MaterialTable from 'material-table';
 import api from '../API/crudAPI';
 
 export function initTable(name, state, setState, context, extraActions = []) {
+    const title = name.charAt(0).toUpperCase() + name.slice(1) + 's'
 
     return (
         <MaterialTable
-            title={name}
+            title={title}
             columns={state.columns}
             data={state.data}
             actions={extraActions}
