@@ -30,7 +30,7 @@ export function initTable(name, state, setState, context, extraActions = []) {
 }
 
 export function createList(name, state, setState) {
-    api.list(name)
+    api.list(name, localStorage)
         .then(res => {
             setState({
                 columns: state.columns,
@@ -40,7 +40,7 @@ export function createList(name, state, setState) {
 }
 
 export function handleRowAdd(name, newData, state, setState, resolve, context) {
-    api.create(name, newData)
+    api.create(name, newData, localStorage)
         .then(res => {
             let dataToAdd = [...state.data, newData];
             setState({
@@ -56,7 +56,7 @@ export function handleRowAdd(name, newData, state, setState, resolve, context) {
 }
 
 export function handleRowUpdate(name, newData, oldData, state, setState, resolve, context) {
-    api.edit(name, newData)
+    api.edit(name, newData, localStorage)
         .then(res => {
             const dataUpdate = [...state.data];
             const index = oldData.tableData.id;
@@ -75,7 +75,7 @@ export function handleRowUpdate(name, newData, oldData, state, setState, resolve
 }
 
 export function handleRowDelete(name, oldData, state, setState, resolve, context) {
-    api.remove(name, oldData)
+    api.remove(name, oldData, localStorage)
         .then(res => {
             const dataDelete = [...state.data];
             const index = oldData.tableData.id;

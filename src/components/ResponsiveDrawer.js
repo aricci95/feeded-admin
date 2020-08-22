@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
+  mainContent: {
+    marginTop: theme.spacing(8),
+  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
@@ -191,7 +194,9 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {renderPageComponent()}
+        <div className={classes.mainContent}>
+          {renderPageComponent()}
+        </div>
       </main>
     </div>
   );

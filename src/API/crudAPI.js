@@ -1,24 +1,26 @@
-const headers = {
-    'Content-Type': 'application/json',
-    'email': localStorage.getItem('email'),
-    'token': localStorage.getItem('authToken'),
-}
-
 const api = {
-    list: function (name) {
+    list: function (name, storage) {
         const requestOptions = {
             method: 'GET',
-            headers: headers,
+            headers: {
+                'content-type': 'application/json',
+                'email': storage.email,
+                'token': storage.authToken,
+            },
         };
 
         return fetch(process.env.REACT_APP_API_URL + '/' + name + 's', requestOptions)
             .then((response) => response.json())
             .catch((error) => console.error(error))
     },
-    create: function (name, params) {
+    create: function (name, params, storage) {
         const requestOptions = {
             method: 'POST',
-            headers: headers,
+            headers: {
+                'content-type': 'application/json',
+                'email': storage.email,
+                'token': storage.authToken,
+            },
             body: JSON.stringify(params)
         };
 
@@ -26,10 +28,14 @@ const api = {
             .then(response => response.json())
             .catch((error) => console.error(error));
     },
-    edit: function (name, params) {
+    edit: function (name, params, storage) {
         const requestOptions = {
             method: 'PUT',
-            headers: headers,
+            headers: {
+                'content-type': 'application/json',
+                'email': storage.email,
+                'token': storage.authToken,
+            },
             body: JSON.stringify(params)
         };
 
@@ -39,10 +45,14 @@ const api = {
             .then(response => response.json())
             .catch((error) => console.error(error));
     },
-    remove: function (name, params) {
+    remove: function (name, params, storage) {
         const requestOptions = {
             method: 'DELETE',
-            headers: headers,
+            headers: {
+                'content-type': 'application/json',
+                'email': storage.email,
+                'token': storage.authToken,
+            },
         };
 
         const url = process.env.REACT_APP_API_URL + '/' + name + 's/' + params._id;
