@@ -1,13 +1,24 @@
+const headers = {
+    'Content-Type': 'application/json',
+    'email': localStorage.getItem('email'),
+    'token': localStorage.getItem('authToken'),
+}
+
 const api = {
     list: function (name) {
-        return fetch(process.env.REACT_APP_API_URL + '/' + name + 's')
+        const requestOptions = {
+            method: 'GET',
+            headers: headers,
+        };
+
+        return fetch(process.env.REACT_APP_API_URL + '/' + name + 's', requestOptions)
             .then((response) => response.json())
             .catch((error) => console.error(error))
     },
     create: function (name, params) {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
             body: JSON.stringify(params)
         };
 
@@ -18,7 +29,7 @@ const api = {
     edit: function (name, params) {
         const requestOptions = {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
             body: JSON.stringify(params)
         };
 
@@ -31,6 +42,7 @@ const api = {
     remove: function (name, params) {
         const requestOptions = {
             method: 'DELETE',
+            headers: headers,
         };
 
         const url = process.env.REACT_APP_API_URL + '/' + name + 's/' + params._id;
