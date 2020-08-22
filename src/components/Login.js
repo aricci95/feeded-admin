@@ -67,15 +67,14 @@ export default function SignIn(props) {
     const classes = useStyles();
 
     const handleLogin = () => {
-        authAPI.login(email, password)
-        props.handleAuth(true)
+        authAPI.login(email, password, props.handleAuth)
     }
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.backgroundFeeded}>
-                <img src={logo} />
+                <img src={logo} alt={logo} />
             </div>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>

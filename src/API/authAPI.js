@@ -1,5 +1,5 @@
 const api = {
-    login: function (email, password) {
+    login: function (email, password, handleAuth) {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -15,6 +15,7 @@ const api = {
                 if (res.code === 200) {
                     localStorage.setItem('email', email);
                     localStorage.setItem('authToken', res.token);
+                    handleAuth(true)
                 } else {
                     alert(res.message);
                 }
@@ -22,7 +23,7 @@ const api = {
             .catch((error) => console.error(error))
             .catch((err) => alert(err.message))
     },
-    logout: function (email, password) {
+    logout: function () {
         localStorage.clear()
     }
 }

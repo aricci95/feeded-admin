@@ -108,7 +108,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <div className={classes.toolbar}>
-        <img src={logo} />
+        <img src={logo} alt={logo} />
       </div>
       <Divider />
       <List>
