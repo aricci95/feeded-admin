@@ -41,7 +41,7 @@ export default function FormDialog() {
 
       state.user.password = bcrypt.hashSync(password)
 
-      crudAPI.edit('user', state.user)
+      crudAPI.edit('user', state.user, localStorage)
 
       context.toast('Mot de passe modifé');
 

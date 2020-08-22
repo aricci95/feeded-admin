@@ -19,6 +19,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import TableList from './TableList'
+import FoodList from './FoodList'
 import PasswordModal from './PasswordModal'
 import logo from '../images/feeded_logo.png'
 import authAPI from '../API/authAPI'
@@ -100,7 +101,7 @@ function ResponsiveDrawer(props) {
           </div>
         )
       case 'Plats':
-        return <FoodIcon />
+        return <FoodList />
       case 'Déconnexion':
         return <LogoutIcon />
       default:
