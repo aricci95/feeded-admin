@@ -11,7 +11,7 @@ export default function UserList(props) {
         {
             title: 'Rôle',
             field: 'role',
-            lookup: {Admin: 'Admin', Service: 'Service' },
+            lookup: {2: 'Admin', 3: 'Service' },
         },
     ];
     const extraActions = [
